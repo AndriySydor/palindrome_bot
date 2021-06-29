@@ -14,12 +14,10 @@ dp = Dispatcher(bot)
 
 # palindrome checking function
 def palindrome(text):
-    text = text.lower()
-    text = list(text)
-    for i in range(0, int(len(text) / 2)):
-        if text[i] != text[0 - i - 1]:
-            return False
-    return True
+    reverse = text.lower()[::-1]
+    if text.lower() == reverse:
+        return True
+    return False
 
 
 # 'start' command
@@ -38,7 +36,7 @@ async def send_ask(message: types.Message):
 @dp.message_handler(content_types=['text'])
 async def send_palindrome(message: types.Message):
     if palindrome(message.text):
-        await message.answer("This is really palindrome!")
+        await message.answer("This is really a palindrome!")
     else:
         await message.answer("Sorry, this is not a palindrome((")
 
